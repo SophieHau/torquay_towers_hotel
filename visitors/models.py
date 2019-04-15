@@ -10,8 +10,8 @@ class UserHotel(models.Model):
 class Room(models.Model):
 	number = models.CharField(max_length=5)
 	price = models.CharField(max_length=50, blank-True, null=true)
-	description = models.CharField(max_length=100)
-	areadesc = models.CharField(max_length=100)
+	# description = models.CharField(max_length=100)
+	# areadesc = models.CharField(max_length=100)
 
 class Book(models.Model):
 	customer: models.ForeignKey(User, on_delete=models.CASCADE)
