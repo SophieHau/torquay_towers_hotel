@@ -23,3 +23,8 @@ def logout_view(request):
     logout(request)
     return render(request, 'logout.html')
 
+def booking(request):
+	return render(request, 'booking.html')
+
+def reviews(request):
+	return render(request, 'reviews.html')
