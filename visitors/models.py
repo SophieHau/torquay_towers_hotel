@@ -2,14 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class UserHotel(models.Model):
-	phone = models.CharField(max_length=10, blank-True, null=true)
+	phone = models.CharField(max_length=10, blank=True, null=True)
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	def __str__(self):
 		return self.user.username
 
 class Room(models.Model):
 	number = models.CharField(max_length=5)
-	price = models.CharField(max_length=50, blank-True, null=true)
+	price = models.CharField(max_length=50, blank=True, null=true)
 	# description = models.CharField(max_length=100)
 	# areadesc = models.CharField(max_length=100)
 
