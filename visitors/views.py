@@ -4,8 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
 
-@login_required(login_url='/accounts/login/')
-def index(request, user_id):
+def index(request):
     return render(request, 'index.html')
 
 def login_view(request):
@@ -16,7 +15,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('index', user_id=user.id)
+            return redirect('index')
 
     return render(request, 'login.html')
 
