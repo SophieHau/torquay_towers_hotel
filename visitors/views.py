@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from .forms import BookingForm
 
 
 def index(request):
@@ -24,7 +25,17 @@ def logout_view(request):
     return render(request, 'logout.html')
 
 def booking(request):
-	return render(request, 'booking.html')
+	if request.method == 'POST':
+		booking_form = BookingForm(request.POST)
+		if booking_form.is_valid():
+			booking = booking_form.save(commit=False)
+			booking.customer = request.user
+			booking.save() 
+	else:
+		booking_form = BookingForm()
+	return render(request, 'booking.html', {
+		'booking_form': booking_form
+		})
 
 def reviews(request):
 	return render(request, 'reviews.html')
