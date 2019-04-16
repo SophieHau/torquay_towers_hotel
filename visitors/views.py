@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.utils import timezone
+from datetime import *
+from .models import Booking, Room
 
 @login_required(login_url='accounts/login/')
 def index(request):
@@ -29,23 +31,3 @@ def booking(request):
 def reviews(request):
 	return render(request, 'reviews.html')
 
-# def show_vacancies(request):
-#     if request.method == 'POST':
-#         start_date = request.POST['start_date']
-#         end_date = request.POST['end_date']
-#         rooms = Room.objects.all()
-#         for room in rooms:
-
-#     Can I book a stay?
-# given: X people,
-#        C start date,
-#        D end date.
-# let A = today
-# if C is before A - return No
-# we need to find all rooms which are NOT free between C and D:
-# for each day between C and D (inclusive?)
-# get all bookings which:
-#     start date is before C, 
-#         and end date is after C
-#     OR start date is on or after C
-#         and start date is before D
