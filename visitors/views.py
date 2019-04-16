@@ -4,13 +4,14 @@ from .models import UserHotel, Room, Booking
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .forms import BookingForm
+from django.utils import timezone
+from datetime import *
 
-
+@login_required(login_url='accounts/login/')
 def index(request):
     return render(request, 'index.html')
 
 def login_view(request):
-
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -46,3 +47,4 @@ def bookingok(request):
 
 def reviews(request):
 	return render(request, 'reviews.html')
+
