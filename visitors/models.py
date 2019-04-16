@@ -11,6 +11,8 @@ class UserHotel(models.Model):
 class Room(models.Model):
 	number = models.CharField(max_length=5)
 	price = models.CharField(max_length=50, blank=True, null=True)
+	def __str__(self):
+		return self.number
 
 	@staticmethod
     def get_free_rooms(start_date, end_date):
@@ -31,3 +33,5 @@ class Booking(models.Model):
 	room = models.ForeignKey(Room, on_delete=models.CASCADE, blank=True, null=True)
 	startdate = models.DateField(blank=True, null=True)
 	enddate = models.DateField(blank=True, null=True)
+	def __str__(self):
+		return str(self.room)
