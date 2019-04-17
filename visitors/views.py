@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from .models import UserHotel, Room, Booking
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .forms import BookingForm
+from .forms import BookingForm, InfoRequestForm
 from django.utils import timezone
 from datetime import *
 
@@ -44,6 +44,18 @@ def booking(request):
 		return render(request, 'booking.html', {
 			'booking_form': booking_form
 		})
+
+def inforequest(request):
+	if request.method == 'POST':
+		inforequest_form = InfoRequestForm(request.POST)
+		if inforequest_form.is_valid():
+			inforequest = inforequest_form.save()
+		return redirect('index')	
+	else:
+		inforequest_form = InfoRequestForm()
+		return render(request, 'inforequest.html', {
+			'inforequest_form': inforequest_form
+			})
 
 def bookingok(request):
 	return render(request, 'bookingok.html')

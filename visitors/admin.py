@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserHotel, Room, Booking
+from .models import UserHotel, Room, Booking, InfoRequest
 
 # to do: register models for Admin app to use
 
@@ -8,3 +8,5 @@ from .models import UserHotel, Room, Booking
 admin.site.register(UserHotel)
 admin.site.register(Room)
 admin.site.register(Booking)
+admin.site.register(InfoRequest)
+

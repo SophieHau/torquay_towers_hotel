@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Info Request{% endblock %}
+{% block content %}
+	<div class="container">
+		<h1>Info Request</h1>
+		<table>
+		<form method="post" action="{% url 'inforequest' %}">
+		  {% csrf_token %}
+		  {{ inforequest_form }}
+		</table>
+		  <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Send</button> 
+		</form>
+	</div>
+{% endblock %}
