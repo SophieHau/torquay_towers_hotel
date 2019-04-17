@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'visitors',
-    'bootstrap_datepicker_plus',
+    'bootstrap4',
 ]
 
 BOOTSTRAP4 = {
