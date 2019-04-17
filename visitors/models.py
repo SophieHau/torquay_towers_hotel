@@ -32,7 +32,6 @@ class Room(models.Model):
 
 
 class Booking(models.Model):
-<<<<<<< HEAD
 	customer = models.ForeignKey(UserHotel, on_delete=models.CASCADE)
 	room = models.ForeignKey(Room, on_delete=models.CASCADE, blank=True, null=True)
 	startdate = models.DateField(blank=True, null=True)
