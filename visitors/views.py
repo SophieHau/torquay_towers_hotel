@@ -28,6 +28,7 @@ def logout_view(request):
 
 def booking(request):
 	if request.method == 'POST':
+		print(request.POST)
 		booking_form = BookingForm(request.POST)
 		if booking_form.is_valid():
 			booking = booking_form.save(commit=False)
@@ -36,6 +37,8 @@ def booking(request):
 			booking.customer = h
 			booking.save() 
 			return redirect('visitor-booking-ok')
+		else:
+			return redirect('visitor-booking')
 	else:
 		booking_form = BookingForm()
 		return render(request, 'booking.html', {
