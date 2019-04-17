@@ -15,18 +15,18 @@ class Room(models.Model):
 		return self.number
 
 	@staticmethod
-    def get_free_rooms(start_date, end_date):
-        '''get all rooms without bookings whose:
-               start date is before C,
-                   and end date is after C
-               OR whose start date is on or after C
-                   and start date is before D. '''
-        free_rooms = Room.objects.exclude(
-            Q(booking__start_date__lt=start_date,
-              booking__end_date__gt=start_date) |
-            Q(booking__start_date__gte=start_date,
-              booking__start_date__lt=end_date))
-        return free_rooms
+	def get_free_rooms(start_date, end_date):
+		'''get all rooms without bookings whose:
+				start date is before C,
+				and end date is after C
+				OR whose start date is on or after C
+				and start date is before D. '''
+		free_rooms = Room.objects.exclude(
+			Q(booking__start_date__lt=start_date,
+				booking__end_date__gt=start_date) |
+			Q(booking__start_date__gte=start_date,
+				booking__start_date__lt=end_date))
+		return free_rooms
 
 class Booking(models.Model):
 	customer = models.ForeignKey(UserHotel, on_delete=models.CASCADE)
