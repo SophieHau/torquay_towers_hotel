@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import TextInput
 from .models import UserHotel, Room, Booking
+from bootstrap_datepicker_plus import DatePickerInput
 
 # class Booking(models.Model):
 #     customer = models.ForeignKey(UserHotel, on_delete=models.CASCADE)
@@ -13,4 +14,7 @@ class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ['room','startdate','enddate']
-        # widgets = {'movie': forms.HiddenInput()}
+        widgets = {
+            'startdate': DatePickerInput(), # default date-format %m/%d/%Y will be used
+            'enddate': DatePickerInput(format='%d-%m-%Y'), # specify date-frmat
+        }
