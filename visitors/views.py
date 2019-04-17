@@ -54,3 +54,16 @@ def booking_confirmed(request):
 def reviews(request):
     return render(request, 'reviews.html')
 
+def inforequest(request):
+	if request.method == 'POST':
+		inforequest_form = InfoRequestForm(request.POST)
+		if inforequest_form.is_valid():
+			inforequest = inforequest_form.save()
+			return redirect('index')
+		else:
+			return redirect('inforequest')
+	inforequest_form = InfoRequestForm()
+	return render(request, 'inforequest.html', {
+    	'inforequest_form': inforequest_form
+    	})
+    
