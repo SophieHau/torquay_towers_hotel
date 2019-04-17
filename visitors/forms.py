@@ -12,5 +12,5 @@ from .models import UserHotel, Room, Booking
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['room','startdate','enddate']
+        fields = ['startdate', 'enddate']
         # widgets = {'movie': forms.HiddenInput()}

@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from .models import UserHotel, Room, Booking
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .forms import BookingForm
 from django.utils import timezone
 from datetime import *
+from .models import Booking, Room, UserHotel
+from .forms import BookingForm
 
 @login_required(login_url='accounts/login/')
 def index(request):
@@ -26,25 +26,31 @@ def logout_view(request):
     logout(request)
     return render(request, 'logout.html')
 
-def booking(request):
-	if request.method == 'POST':
-		booking_form = BookingForm(request.POST)
-		if booking_form.is_valid():
-			booking = booking_form.save(commit=False)
-			u = request.user
-			h = UserHotel.objects.get(user=u)
-			booking.customer = h
-			booking.save() 
-			return redirect('visitor-booking-ok')
-	else:
-		booking_form = BookingForm()
-		return render(request, 'booking.html', {
-			'booking_form': booking_form
-		})
+def booking(request, user_id):
+    if request.method == 'POST':
+        user = User.objects.get(pk=user_id)
+        customer = UserHotel.objects.get(user_id=user.id)
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            rooms = Room.get_free_rooms(booking.startdate, booking.enddate)
+            if len(rooms) > 0:
+                booking.room = rooms[0]
+                booking.customer = customer
+                booking.save()
+                return redirect('booking_confirmed')
+            else:
+                return redirect('index')
+    form = BookingForm()
+    return render(request, 'booking.html', {
+            'form': form,
+        })
 
-def bookingok(request):
-	return render(request, 'bookingok.html')
+
+def booking_confirmed(request):
+    return render(request, 'bookingok.html')
+
 
 def reviews(request):
-	return render(request, 'reviews.html')
+    return render(request, 'reviews.html')
 
