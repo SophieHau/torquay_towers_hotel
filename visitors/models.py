@@ -2,11 +2,13 @@ from django.db import models
 from django.db.models import Q
 from django.contrib.auth.models import User
 
+
 class UserHotel(models.Model):
     phone = models.CharField(max_length=10, blank=True, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.user.username
+
 
 class Room(models.Model):
     number = models.CharField(max_length=5)
@@ -27,6 +29,7 @@ class Room(models.Model):
             Q(booking__startdate__gte=start_date,
               booking__startdate__lt=end_date))
         return free_rooms
+
 
 class Booking(models.Model):
     customer = models.ForeignKey(UserHotel, on_delete=models.CASCADE)
